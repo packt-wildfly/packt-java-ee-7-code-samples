@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/default.xhtml"
+                xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="content">
+
+
+        <div class="jumbotron">
+            <h1>Theatre Setup</h1>
+
+            <p>Enter the information about Seats</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Add seats</h3>
+                    </div>
+                    <div class="panel-body">
+                        <h:form id="reg" role="form">
+
+                            <div
+                                    class="form-group has-feedback #{!desc.valid? 'has-error' : ''}">
+                                <h:outputLabel for="desc" value="Description"
+                                               styleClass="control-label"/>
+                                <h:inputText id="desc" value="#{newSeatType.description}"
+                                             p:placeholder="Enter a description here" class="form-control"
+                                             binding="#{desc}"/>
+								<span
+                                        class="#{!desc.valid ? 'glyphicon glyphicon-remove form-control-feedback' : ''}"/>
+                                <h:message for="desc" errorClass="control-label has-error"/>
+                            </div>
+
+                            <div
+                                    class="form-group  #{!price.valid and facesContext.validationFailed? 'has-error' : ''}">
+                                <h:outputLabel for="price" value="Price:"
+                                               styleClass="control-label"/>
+
+                                <div class="input-group  has-feedback">
+                                    <span class="input-group-addon">$</span>
+                                    <h:inputText id="price" value="#{newSeatType.price}"
+                                                 class="form-control" p:placeholder="Enter a price"
+                                                 binding="#{price}"/>
+									<span
+                                            class="#{!price.valid ? 'glyphicon glyphicon-remove input-group-feedback input-group-addon' : ''}"/>
+                                </div>
+
+                                <h:message for="price" errorClass="control-label has-error"/>
+                            </div>
+
+                            <div
+                                    class="form-group has-feedback #{!quantity.valid and facesContext.validationFailed? 'has-error' : ''}">
+
+                                <h:outputLabel for="quantity" value="Number of Seats:"
+                                               styleClass="control-label"/>
+                                <h:inputText id="quantity" value="#{newSeatType.quantity}"
+                                             class="form-control" p:placeholder="Enter quantity"
+                                             binding="#{quantity}"/>
+								<span
+                                        class="#{!quantity.valid ? 'glyphicon glyphicon-remove form-control-feedback' : ''}"/>
+                                <h:message for="quantity" errorClass="control-label has-error"/>
+                            </div>
+
+                            <div class="form-group">
+                                <h:outputLabel for="position" value="Position:"
+                                               styleClass="control-label"/>
+                                <h:selectOneMenu value="#{newSeatType.position}" id="position"
+                                                 class="form-control">
+                                    <f:selectItems value="#{theatreSetupService.positions}"
+                                                   var="pos" itemValue="#{pos}" itemLabel="#{pos.label}"/>
+                                </h:selectOneMenu>
+                            </div>
+
+                            <div class="form-group">
+
+                                <h:commandButton id="Add"
+                                                 action="#{theatreSetupService.addNewSeats}" value="Add"
+                                                 styleClass="btn btn-primary"/>
+                            </div>
+                            <h:messages styleClass="messages"
+                                        style="list-style: none; padding:0; margin:0;"
+                                        errorClass="alert alert-error" infoClass="alert alert-success"
+                                        warnClass="alert alert-warning" globalOnly="true"/>
+
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h2 class="panel-title">Seats List</h2>
+                    </div>
+                    <div class="panel-body">
+                        <h:form id="reg2">
+                            <h:commandButton id="Finish"
+                                             action="#{theatreSetupService.createTheatre}"
+                                             value="Finalize the theatre setup"
+                                             styleClass="btn btn-default  btn-block"/>
+                        </h:form>
+                    </div>
+                    <h:panelGroup rendered="#{empty seatTypes}">
+                        <em>No Seats Added.</em>
+                    </h:panelGroup>
+                    <h:dataTable var="seatType" value="#{seatTypes}"
+                                 rendered="#{not empty seatTypes}"
+                                 styleClass="table table-hover table-striped ">
+                        <h:column>
+                            <f:facet name="header">Id</f:facet>
+                            #{seatType.id}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Name</f:facet>
+                            #{seatType.description}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Position</f:facet>
+                            #{seatType.position.label}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Price</f:facet>
+                            $ #{seatType.price}
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">Quantity</f:facet>
+                            #{seatType.quantity}
+                        </h:column>
+                    </h:dataTable>
+
+                </div>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+<head>
+    <title>FORM based Login</title>
+</head>
+<body>
+<form method="post" action="j_security_check" name="loginForm">
+    <h:panelGrid columns="2">
+        <h:outputLabel id="userNameLabel" for="j_username" value="Username:"/>
+        <h:inputText id="j_username" autocomplete="off"/>
+        <h:outputLabel id="passwordLabel" for="j_password" value="Password:"/>
+        <h:inputSecret id="j_password" autocomplete="off"/>
+
+        <div/>
+        <h:panelGroup>
+            <h:commandButton type="submit" value="Login"/>
+            <h:commandButton type="reset" value="Clear"/>
+        </h:panelGroup>
+    </h:panelGrid>
+</form>
+</body>
+</html>

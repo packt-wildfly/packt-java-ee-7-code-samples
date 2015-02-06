@@ -1,0 +1,5 @@
+Seat_Type:
+  - description: test
+    position: "box"
+    price: 10
+    quantity: 10

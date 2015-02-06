@@ -1,0 +1,29 @@
+/* Core styles for the page */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F1F1F1;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 0.8em;
+    color: #363636;
+}
+
+.info {
+    color: black;
+    border: 1px solid black;
+    width: 200px;
+}
+
+.error {
+    color: red;
+    border: 1px solid black;
+    width: 200px;
+}
+
+.smoke {
+    border: thin solid black;
+
+    font-size: small;
+    background-color: #EEE5FA;
+    font-family: Verdana
+}

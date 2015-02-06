@@ -1,0 +1,17 @@
+<job id="externalSystem" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+     version="1.0">
+    <properties>
+        <property name="logFile" value="log.txt"/>
+        <property name="bitcoinFile" value="bitcoins.txt"/>
+    </properties>
+    <step id="processData" next="checkBitcoins">
+        <chunk item-count="2">
+            <reader ref="externalSystemReader"/>
+            <processor ref="seatProcessor"/>
+            <writer ref="seatWriter"/>
+        </chunk>
+    </step>
+    <step id="checkBitcoins">
+        <batchlet ref="bitcoinTask"/>
+    </step>
+</job>
